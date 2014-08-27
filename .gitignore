@@ -1,0 +1,19 @@
+#txt or file
+*.class
+*.iml
+*.tmp
+*.class
+.idea/
+.project
+.idea/
+.classpath
+.settings/
+*/target/
+/target/*
+/target/
+*.log
+#Package Files
+*.jar
+*.war
+*.ear
+*.zip
