@@ -3,6 +3,7 @@
 *.iml
 *.tmp
 *.class
+*.pyc
 .idea/
 .project
 .idea/

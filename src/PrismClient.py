@@ -19,7 +19,7 @@ class PrismClient:
         return self.run("GET", action, params)
 
     def run(self, method, action, params):
-        request_params = self.fix_params(action, params)
+        request_params = self.fix_params(method, params)
         print "请求url：%s \t \n" % (self.url)
         print "请求参数:%s \t \n" % (request_params)
         print "请求方式:%s \t \n" % (method)
@@ -55,13 +55,3 @@ class PrismClient:
             md5.update(i)
         md5.digest()
         return md5.hexdigest()
-
-
-if __name__ == '__main__':
-    url = "Http://dilbmtcv.apihub.cn/api";
-    key = "buwb2lii"
-    secret = "ucr72ygfutspqeuu6s36"
-    params = {"id": 1, "name": "allen"}
-    prismClient = PrismClient(url, key, secret)
-    print prismClient.doPost(params)
-    print prismClient.doGet(params)
