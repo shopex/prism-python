@@ -1,12 +1,14 @@
 # __author__ = 'daixinyu'
 # coding=utf8
-from distutils.core import setup
+from setuptools import setup, find_packages
 
-setup(name='prism_py',
-      version='1.0',
-      description='The version of prism',
-      author='daixinyu',
-      author_email='daixinyu@shopex.com',
-      url='XXX',
-      py_modules=['PrismClient'],
+setup(
+    name="prismSDK",
+    version="0.01",
+    description="Shopex prismSDK",
+    author="daixinyu",
+    url="xxx",
+    license="xxx",
+    packages=find_packages(),
+    scripts=["test.py"],
 )

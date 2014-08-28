@@ -1,8 +1,9 @@
 # __author__ = 'daixinyu'
 # coding=utf8
 
-from PrismClient import PrismClient
 import unittest
+
+from com.shopex.python.prism import PrismClient
 
 
 class PrismClientTestCase(unittest.TestCase):

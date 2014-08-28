@@ -13,6 +13,7 @@
 /target/*
 /target/
 *.log
+*.bak*
 #Package Files
 *.jar
 *.war
