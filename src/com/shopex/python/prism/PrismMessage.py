@@ -1,13 +1,18 @@
 # __author__ = 'daixinyu'
 # coding=utf8
+from com.shopex.python.config import config
 
 
 class PrismMessage:
-    def __init__(self):
+    def __init__(self, socket):
+        self.socket = socket
+
+    def assemble_publish_data(self):
         pass
 
-    def publish(routing_key, message, content_type="text/plain"):
+    def assemble_ack_date(self):
         pass
 
-    def consume(self):
+    def assemble_consume_date(self):
         pass
+

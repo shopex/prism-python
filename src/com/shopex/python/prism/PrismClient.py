@@ -4,6 +4,8 @@ import hashlib
 import time
 import urllib2
 import urllib
+from com.shopex.python.utils.UrlParser import UrlParser
+from com.shopex.python.prism.PrismNotify import PrismNotify
 
 
 class PrismClient:
@@ -11,12 +13,17 @@ class PrismClient:
         self.url = url
         self.key = key
         self.secret = secret
+        self.url_parser = UrlParser(self.url)
+        self.params = ""
 
-    def doPost(self, action, params):
+    def do_post(self, action, params):
         return self.run("POST", action, params)
 
-    def doGet(self, action, params):
+    def do_get(self, action, params):
         return self.run("GET", action, params)
+
+    def notify(self):
+        return PrismNotify()
 
     def run(self, method, action, params):
         request_params = self.fix_params(method, params)
@@ -38,11 +45,11 @@ class PrismClient:
             return "[%s] \t %s \t %s \t \n" % (method, self.url, e)
 
     def fix_params(self, method, params):
+
         params["client_id"] = self.key
-        request_type = self.url[0:self.url.index(":")].lower()
-        if request_type == "https":
+        if self.url_parser.protocol == "https":
             params["client_secret"] = self.secret
-        elif request_type == "http":
+        elif self.url_parser.protocol == "http":
             params["sign_time"] = int(time.time())
             params["sign_method"] = method
         self.params = params
