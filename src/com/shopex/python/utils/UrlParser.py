@@ -16,7 +16,7 @@ class UrlParser():
         self.query = parsed_tuple.query
 
     def get_site(self):
-        return self.protocol + "://" + self.host + "" if self.port == 80 else self.port
+        return self.protocol + "://" + self.host + (":" if self.port == 80 else ":" + self.port)
 
     def get_site_path(self, path):
         return self.get_site() + path
@@ -34,7 +34,7 @@ class UrlParser():
         return full_url
 
     def get_ws_url(self, method):
-        return "ws://" + self.host + "" if self.port == 80 else self.port + self.path + method;
+        return "ws://" + self.host + (":" if self.port == 80 else ":" + self.port) + self.path + method
 
     def get_ws_path(self, method):
         return self.path + method

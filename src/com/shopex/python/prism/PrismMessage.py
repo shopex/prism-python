@@ -6,13 +6,14 @@ from com.shopex.python.config import config
 class PrismMessage:
     def __init__(self, socket):
         self.socket = socket
+        self.tag_id = 1
 
     def assemble_publish_data(self):
-        pass
+        return "1"
 
     def assemble_ack_date(self):
-        pass
+        return "2"
 
     def assemble_consume_date(self):
-        pass
+        return "3"
 

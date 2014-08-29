@@ -6,6 +6,7 @@ import urllib2
 import urllib
 from com.shopex.python.utils.UrlParser import UrlParser
 from com.shopex.python.prism.PrismNotify import PrismNotify
+from com.shopex.python.handler.PrismMessageHandler import PrismMessageHandler
 
 
 class PrismClient:
@@ -13,7 +14,7 @@ class PrismClient:
         self.url = url
         self.key = key
         self.secret = secret
-        self.url_parser = UrlParser(self.url)
+        self.url_info = UrlParser(self.url)
         self.params = ""
 
     def do_post(self, action, params):
@@ -22,8 +23,8 @@ class PrismClient:
     def do_get(self, action, params):
         return self.run("GET", action, params)
 
-    def notify(self):
-        return PrismNotify()
+    def notify(self, method):
+        return PrismNotify(self.url_info, method, PrismMessageHandler())
 
     def run(self, method, action, params):
         request_params = self.fix_params(method, params)
@@ -47,9 +48,9 @@ class PrismClient:
     def fix_params(self, method, params):
 
         params["client_id"] = self.key
-        if self.url_parser.protocol == "https":
+        if self.url_info.protocol == "https":
             params["client_secret"] = self.secret
-        elif self.url_parser.protocol == "http":
+        elif self.url_info.protocol == "http":
             params["sign_time"] = int(time.time())
             params["sign_method"] = method
         self.params = params

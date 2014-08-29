@@ -16,11 +16,13 @@ class WebSocket(threading.Thread):
         self.address = address
 
     def run(self):
-        logger.debug('WebSocket Start...')
         if self.handshake():
             while True:
+                # self.send_date("welcome")
                 receive_buff = self.receive_message()
-                self.send_date(receive_buff)
+                print "receive_message:%s \t \n" % (receive_buff)
+                if not receive_buff:
+                    self.send_date("Empty data")
 
     def send_date(self, pData):
         if (pData == False):
@@ -42,8 +44,8 @@ class WebSocket(threading.Thread):
     # 接收客户端发送过来的消息,并且解包
     def receive_message(self):
         try:
-            pData = self.connection.recv(2048)
-            if not len(pData):
+            pData = self.connection.recv(8192)
+            if not pData or not len(pData):
                 return False
         except Exception, e:
             return False
@@ -99,6 +101,7 @@ class WebSocketInit:
     def __init__(self, host, port):
         self.host = host
         self.port = port
+        self.connection = None
 
     def init_socket(self):
         sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
@@ -109,8 +112,8 @@ class WebSocketInit:
             logger.debug("[WebSocketInit] %s \t \n" % (e))
             sys.exit()
         while True:  # 创建一个死循环,接受客户端
-            connection, address = sock.accept()
-            web_socket = WebSocket(connection, address)
+            self.connection, address = sock.accept()
+            web_socket = WebSocket(self.connection, address)
             web_socket.start()
 
 
