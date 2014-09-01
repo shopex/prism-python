@@ -12,6 +12,7 @@
 */target/
 /target/*
 /target/
+/out/
 *.log
 *.bak*
 #Package Files
