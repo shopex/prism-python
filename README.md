@@ -1,5 +1,5 @@
 shopex Prism sdk (python version)
 
-ÓÃÍ¾
+ç”¨é€”
 
-ÊµÏÖshopex Prism µÄPython°æSDK¹©µÚÈý·½Ê¹ÓÃ
+å®žçŽ°shopex Prism çš„Pythonç‰ˆSDKä¾›ç¬¬ä¸‰æ–¹ä½¿ç”¨
