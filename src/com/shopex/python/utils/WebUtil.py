@@ -12,6 +12,16 @@ class WebUtil():
         pass
 
     @staticmethod
+    def build_query(params={}):
+        query = ""
+        if not params:
+            return ""
+        for key, val in params.iteritems():
+            query += key + "=" + str(val) + "&"
+        return query[0:len(query) - 1]
+
+
+    @staticmethod
     def do_post(url, url_info, params, header_data):
         logger.info("请求方式:do_post \t \n")
         logger.info("请求url：%s \t \n" % (url))

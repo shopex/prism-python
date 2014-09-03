@@ -23,3 +23,20 @@ def mix_request_params(params):
         return query[0:len(query) - 1]
     return ""
 
+
+def isBlank(str):
+    str = remove_space(str)
+    if str == None or len(str) == 0:
+        return True
+    return False
+
+
+def remove_space(str):
+    str_tmp = ""
+    if str == None:
+        return str_tmp
+    for i in str:
+        if i != " ":
+            str_tmp += i
+    return str_tmp
+

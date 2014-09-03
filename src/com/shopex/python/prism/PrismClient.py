@@ -19,9 +19,11 @@ class PrismClient:
         self.url_info = UrlParser(self.url)
         self.token_url = self.url_info.get_site_path("/oauth/token")
         self.authorize_url = self.url_info.get_site_path("/oauth/authorize")
-        self.check_seesion_url = self.url_info.get_site_with_append_path("/platform/oauth/session_check")
+        self.check_session_url = self.url_info.get_site_with_append_path("/platform/oauth/session_check")
         self.sys_params = {}
         self.token = ""
+        self.session_id = ""
+        self.refresh_token = ""
         self.init_sys_params()
 
     def init_sys_params(self):
