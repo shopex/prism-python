@@ -23,10 +23,10 @@ class WebUtil():
 
     @staticmethod
     def do_post(url, url_info, params, header_data):
-        logger.info("请求方式:do_post \t \n")
-        logger.info("请求url：%s \t \n" % (url))
-        logger.info("请求参数:%s \t \n" % (params))
-        logger.info("请求头消息:%s \t \n" % (header_data))
+        logger.info("Request Type:do_post \t \n")
+        logger.info("Request Url：%s \t \n" % (url))
+        logger.info("Request Params:%s \t \n" % (params))
+        logger.info("Request Header Message:%s \t \n" % (header_data))
 
         conn = None
         try:
@@ -44,10 +44,10 @@ class WebUtil():
     @staticmethod
     def do_get(url, url_info, params, header_data):
         url += WebUtil.build_query(params)
-        logger.info("请求方式:do_get \t \n")
-        logger.info("请求url：%s \t \n" % (url))
-        logger.info("请求参数:%s \t \n" % (params))
-        logger.info("请求头消息:%s \t \n" % (header_data))
+        logger.info("Request Type:do_get \t \n")
+        logger.info("Request Url：%s \t \n" % (url))
+        logger.info("Request Params:%s \t \n" % (params))
+        logger.info("Request Header Message:%s \t \n" % (header_data))
 
         conn = None
         try:

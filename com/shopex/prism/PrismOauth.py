@@ -35,6 +35,11 @@ class PrismOauth(PrismClient):
         session_params = {"session_id": prism_session_id}
         result = self.do_post(self.check_session_url, session_params)
         logger.info("[check_session_id] %s \t \n" % (result))
+        if result == "":
+            return False
+        else:
+            session_result = json.loads(result)
+            # todo
         return True
 
     # 获取令牌
