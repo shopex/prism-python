@@ -2,11 +2,13 @@
 # coding=utf8
 import web
 
+from com.shopex.python.utils.LogUtil import path
+
 # web.config.debug = True
 urls = (
-    '/user/login*', 'LoginHandler')
+    "/user/login*", "LoginHandler")
 app = web.application(urls, globals())
-session = web.session.Session(app, web.session.DiskStore('sessions'), initializer={})
+session = web.session.Session(app, web.session.DiskStore(path + "sessions"), initializer={})
 
 if __name__ == "__main__":
     app.run()

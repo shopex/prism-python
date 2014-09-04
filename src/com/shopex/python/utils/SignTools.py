@@ -1,5 +1,6 @@
 # __author__ = 'daixinyu'
 # coding=utf8
+import urllib
 
 
 def mix_header_params(headers):
@@ -16,9 +17,9 @@ def mix_request_params(params):
     if params == "":
         return ""
     query = ""
-    for key, value in params.iteritems():
+    for key in sorted(params.keys()):
         if (key != "" and "sign" != (key)):
-            query += key + "=" + str(value) + "&"
+            query += key + "=" + str(params[key]) + "&"
     if len(query) > 0:
         return query[0:len(query) - 1]
     return ""
@@ -39,4 +40,8 @@ def remove_space(str):
         if i != " ":
             str_tmp += i
     return str_tmp
+
+
+def url_encode(str):
+    return str.replace("/", "%2F")
 

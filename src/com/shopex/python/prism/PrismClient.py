@@ -2,7 +2,6 @@
 # coding=utf8
 import hashlib
 import time
-import urllib2
 
 from com.shopex.python.utils.UrlParser import UrlParser
 from com.shopex.python.prism.PrismNotify import PrismNotify
@@ -44,14 +43,14 @@ class PrismClient:
         return PrismNotify(self.url_info, method, PrismMessageHandler())
 
     def fix_params(self, headers, params, method, url_path):
-        all_params = self.sys_params.copy()
+        all_params = dict(params.items() + self.sys_params.items())
         if self.url_info.protocol == "https":
             all_params["client_secret"] = self.secret
 
         if method == METHOD_GET:
-            all_params[SIGN] = self.sign(headers, params, "", METHOD_GET, url_path)
+            all_params[SIGN] = self.sign(headers, all_params, "", METHOD_GET, url_path)
         elif method == METHOD_POST:
-            all_params[SIGN] = self.sign(headers, "", params, METHOD_GET, url_path)
+            all_params[SIGN] = self.sign(headers, "", all_params, METHOD_POST, url_path)
 
         return all_params
 
@@ -60,15 +59,15 @@ class PrismClient:
         str_header = mix_header_params(headers)
         str_get_param = mix_request_params(get_params)
         str_post_param = mix_request_params(post_params)
-        mix_all_params = self.secret + SEPARATOR + method_type + SEPARATOR + urllib.quote(url_path) \
+        mix_all_params = self.secret + SEPARATOR + method_type + SEPARATOR + url_encode(url_path) \
                          + SEPARATOR + urllib.quote(str_header) + SEPARATOR + urllib.quote(str_get_param) \
                          + SEPARATOR + urllib.quote(str_post_param) + SEPARATOR + self.secret
         md5.update(mix_all_params)
         md5.digest()
-        return md5.hexdigest()
+        return md5.hexdigest().upper()
 
     def get_headers(self):
-        headers = {"User-Agent": "PrismSDK/PYTHON"}
+        headers = {"User-Agent": "PrismSDK/PYTHON", "Content-Type": "application/x-www-form-urlencoded;charset=UTF-8"}
         if self.token:
             headers["Authorization"] = self.token
         return headers

@@ -54,7 +54,7 @@ class PrismOauth(PrismClient):
         query = WebUtil.build_query(params=oauth_params)
         if query:
             # web.seeother(self.authorize_url + "?" + query)
-            web.redirect(self.authorize_url + "?" + query)
+            web.redirect(self.authorize_url + query)
 
     def get_params(self, s):
         i = web.input()

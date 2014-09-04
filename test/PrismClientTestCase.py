@@ -14,9 +14,9 @@ class PrismClientTestCase(unittest.TestCase):
         self.secret = "ucr72ygfutspqeuu6s36"
         self.prismClient = PrismClient(self.url, self.key, self.secret)
 
-    def testDoGet(self):
-        params = {}
-        print self.prismClient.do_get("/platform/notify/status", params)
+    # def testDoGet(self):
+    #     params = {}
+    #     print self.prismClient.do_get("/platform/notify/status", params)
 
     def testDoPost(self):
         params = {"data": "hello"}

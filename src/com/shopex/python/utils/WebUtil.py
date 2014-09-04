@@ -13,7 +13,7 @@ class WebUtil():
 
     @staticmethod
     def build_query(params={}):
-        query = ""
+        query = "?"
         if not params:
             return ""
         for key, val in params.iteritems():
@@ -32,7 +32,7 @@ class WebUtil():
         try:
             params = urllib.urlencode(params)
             conn = httplib.HTTPConnection(url_info.host, url_info.port)
-            conn.request(method=METHOD_POST, url=url, body=params, headers=header_data)
+            conn.request(METHOD_POST, url, body=params, headers=header_data)
             response = conn.getresponse()
             return response.read()
         except Exception, e:
@@ -43,6 +43,7 @@ class WebUtil():
 
     @staticmethod
     def do_get(url, url_info, params, header_data):
+        url += WebUtil.build_query(params)
         logger.info("请求方式:do_get \t \n")
         logger.info("请求url：%s \t \n" % (url))
         logger.info("请求参数:%s \t \n" % (params))
@@ -50,9 +51,8 @@ class WebUtil():
 
         conn = None
         try:
-            params = urllib.urlencode(params)
             conn = httplib.HTTPConnection(url_info.host, url_info.port)
-            conn.request(method=METHOD_GET, url=url, body=params, headers=header_data)
+            conn.request(METHOD_GET, url, headers=header_data)
 
             response = conn.getresponse()
             return response.read()
