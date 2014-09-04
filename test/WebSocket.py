@@ -6,7 +6,9 @@ import hashlib
 import struct
 import socket
 import sys
-from com.shopex.python.utils.LogUtil import logger
+
+from com.shopex import config
+from com.shopex.utils.LogUtil import logger
 
 
 class WebSocket(threading.Thread):
@@ -118,8 +120,6 @@ class WebSocketInit:
 
 
 if __name__ == "__main__":
-    from com.shopex.python.config import config
-
     WebSocketInit(config.host, config.port).init_socket()
 
 
