@@ -13,5 +13,5 @@ setup(
     license="LGPL",
     url="https://github.com/shopex/prism-python",
     packages=["com", "com.shopex","com.shopex.utils", "com.shopex.prism"],
-    platforms=["any"],
+    platforms=["README.md"],
 )

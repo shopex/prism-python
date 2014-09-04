@@ -1,7 +1,6 @@
 # __author__ = 'daixinyu'
 #coding=utf8
-
-from com.shopex.python.utils.UrlParser import UrlParser
+from com.shopex.utils import UrlParser
 
 if __name__ == '__main__':
     urlParser = UrlParser("http://www.google.com/search?hl=en&q=urlparse&btnG=Google+Search")
