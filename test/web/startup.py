@@ -2,7 +2,7 @@
 # coding=utf8
 import web
 
-from com.shopex.prism import PrismOauth
+from com.shopex.prism.PrismOauth import PrismOauth
 
 from com.shopex.utils.LogUtil import path
 
