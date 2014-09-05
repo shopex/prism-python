@@ -1,22 +1,28 @@
 shopex Prism sdk (python version)
+===============================================
 
 用途
+-----------------------------------------------
 
 实现shopex Prism 的Python版SDK供第三方使用
 
 
 功能
+-----------------------------------------------
 
     提供http API调用（GET/POST方式）
     连接Websocket，可以发布/消费/应答消息
     提供oauth认证
 
 要求
+-----------------------------------------------
 
 python sdk 2.6或者以上更高的版本
 
 
 打包与安装
+-----------------------------------------------
+
 
 1、打包
 
@@ -35,10 +41,13 @@ python sdk 2.6或者以上更高的版本
     python setup.py install 安装Prism SDK完成
 
 使用方法
+-----------------------------------------------
 
-1、提供HTTP API调用(GET/POST)(参考如下TestCase代码)
+
+###1、提供HTTP API调用(GET/POST)(参考如下TestCase代码)
 
 ps:
+```
 import unittest
 
 from com.shopex.prism.PrismClient import PrismClient
@@ -62,34 +71,39 @@ class PrismClientTestCase(unittest.TestCase):
 
 if __name__ == '__main__':
     unittest.main()
+```
 
 返回是一串json格式的response消息体
 
-2、OAuth认证
+###2、OAuth认证
 
+```
 url = "http://dilbmtcv.apihub.cn/api"
 key = "buwb2lii"
 secret = "ucr72ygfutspqeuu6s36"
 
 prism_oauth = PrismOauth(self.url, self.key, self.secret, session)
 prism_oauth.require_oauth()   //启动OAuth认证
+```
 
-3、WebSocket
+###3、WebSocket
 
-建立websocket连接
+a、建立websocket连接
 
+```
 method = "/platform/notify"
 prismClient.notify(method);
+```
 
-发布消息
+b、发布消息
 
 prismClient.publish("order.new","hello world");
 
-开启队列消费
+c、开启队列消费
 
 prismClient.consume();
 
-应答消息
+d、应答消息
 
 prismClient.ack(1);
 
