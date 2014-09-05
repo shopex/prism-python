@@ -110,7 +110,7 @@ def _parse_url(url):
     import urllib
 
     protocol, rest = urllib.splittype(url)
-    rest = urllib.splithost(rest)
+    host, rest = urllib.splithost(rest)
     # add by daixinyu
 
     if ":" not in url:

@@ -1,7 +1,8 @@
 # __author__ = 'daixinyu'
 # coding=utf8
 from setuptools import setup, find_packages
-from com.version import version
+
+import version
 
 
 setup(

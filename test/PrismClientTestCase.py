@@ -8,14 +8,15 @@ from com.shopex.prism.PrismClient import PrismClient
 
 class PrismClientTestCase(unittest.TestCase):
     def setUp(self):
-        self.url = "Http://localhost:3398"
-        # self.url = "http://dilbmtcv.apihub.cn/api";
+        # self.url = "Http://localhost:3398"
+        # self.url = "http://192.168.51.103:8899/api"
+        self.url = "http://dilbmtcv.apihub.cn/api";
         self.key = "buwb2lii"
         self.secret = "ucr72ygfutspqeuu6s36"
         self.prismClient = PrismClient(self.url, self.key, self.secret)
 
     # def testDoGet(self):
-    #     params = {}
+    # params = {}
     #     print self.prismClient.do_get("/platform/notify/status", params)
     # #
     # def testDoPost(self):
