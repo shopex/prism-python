@@ -73,6 +73,7 @@ class WebSocket(threading.Thread):
     def handshake(self):
         headers = {}
         shake = self.connection.recv(1024)
+        print "%s \t \n" %(shake)
         if not len(shake):
             return False
         header, data = shake.split('\r\n\r\n', 1)

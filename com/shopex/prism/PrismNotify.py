@@ -1,6 +1,6 @@
 # __author__ = 'daixinyu'
 # coding=utf8
-import websocket
+from com.shopex import websocket
 
 from com.shopex.prism.PrismMessage import PrismMessage
 from com.shopex.utils.LogUtil import logger

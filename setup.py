@@ -1,12 +1,12 @@
 # __author__ = 'daixinyu'
 # coding=utf8
 from setuptools import setup, find_packages
+from com.version import version
 
-VERSION = "0.1"
 
 setup(
     name="prism-python",
-    version=VERSION,
+    version=version,
     description="ShopEx prismSDK for python",
     long_description=open("README.md").read(),
     packages=find_packages(),

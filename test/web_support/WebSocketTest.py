@@ -1,6 +1,6 @@
 # coding=utf8
 
-import websocket
+from com.shopex import websocket
 
 
 def on_message(ws, message):
@@ -24,7 +24,7 @@ def on_open(ws):
 
 if __name__ == "__main__":
     # websocket.enableTrace(True)
-    ws = websocket.WebSocketApp("ws://localhost:3398/",
+    ws = websocket.WebSocketApp("ws://localhost:3398/notify?id=1",
                                 on_message=on_message,
                                 on_error=on_error,
                                 on_close=on_close)
