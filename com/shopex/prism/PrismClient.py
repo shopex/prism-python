@@ -3,7 +3,7 @@
 import hashlib
 import time
 
-from com.shopex.prism import MessageHandler
+from com.shopex.prism.MessageHandler import PrismMessageHandler
 from com.shopex.utils.UrlParser import UrlParser
 from com.shopex.prism.PrismNotify import PrismNotify
 from com.shopex.utils.SignTools import *
@@ -27,7 +27,7 @@ class PrismClient:
 
     def notify(self, method):
         ws_url = self.url_info.get_ws_url(method) + WebUtil.build_query(self.fix_params(None, {}, METHOD_GET, self.url_info.get_ws_path(method)))
-        return PrismNotify(ws_url, MessageHandler())
+        return PrismNotify(ws_url)
 
     def init_sys_params(self):
         self.sys_params[CLIENT_ID] = self.key

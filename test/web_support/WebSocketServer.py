@@ -7,8 +7,8 @@ import struct
 import socket
 import sys
 
-from com.shopex import config
 from com.shopex.utils.LogUtil import logger
+from test import config
 
 
 class WebSocket(threading.Thread):

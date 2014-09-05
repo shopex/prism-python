@@ -10,8 +10,7 @@ from com.shopex.utils.LogUtil import logger
 
 class PrismNotify:
     # socket
-    def __init__(self, ws_url, prism_message_handler=None):
-        self.prism_message_handler = prism_message_handler
+    def __init__(self, ws_url):
         self.socket = websocket.WebSocketApp(ws_url,
                                              on_message=self.on_message,
                                              on_error=self.on_error,
@@ -38,18 +37,13 @@ class PrismNotify:
     # self.socket.send(self.get().assemble_ack_date())
 
     def on_message(self, socket, frame):
-        message = self.get()
-        if self.prism_message_handler:
-            self.prism_message_handler.on_message(socket, message)
+        logger.info("[PrismNotify] socket on_message")
 
     def on_open(self, socket):
-        if self.prism_message_handler:
-            self.prism_message_handler.on_open(socket)
+        logger.info("[PrismNotify] socket on_open")
 
     def on_error(self, socket, error):
-        if self.prism_message_handler:
-            self.prism_message_handler.on_error(socket, error)
+        logger.info("[PrismNotify] socket on_error,error info is %s \t \n" % (error))
 
     def on_close(self, socket):
-        if self.prism_message_handler:
-            self.prism_message_handler.on_close(socket)
+        logger.info("[PrismNotify] socket on_close")
