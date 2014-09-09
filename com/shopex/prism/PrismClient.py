@@ -3,11 +3,12 @@
 import hashlib
 import time
 
-from com.shopex.prism.MessageHandler import PrismMessageHandler
 from com.shopex.utils.UrlParser import UrlParser
+
 from com.shopex.prism.PrismNotify import PrismNotify
 from com.shopex.utils.SignTools import *
 from com.shopex.utils.WebUtil import *
+from com.shopex import websocket
 
 
 class PrismClient:
@@ -27,7 +28,20 @@ class PrismClient:
 
     def notify(self, method):
         ws_url = self.url_info.get_ws_url(method) + WebUtil.build_query(self.fix_params(None, {}, METHOD_GET, self.url_info.get_ws_path(method)))
+        # ws_url = "ws://echo.websocket.org/"
         return PrismNotify(ws_url)
+
+    # def execute_notify(self, method):
+    # ws_url = self.url_info.get_ws_url(method) + WebUtil.build_query(self.fix_params(None, {}, METHOD_GET, self.url_info.get_ws_path(method)))
+    # ws = websocket.create_connection(ws_url)
+    # print ws
+    # # print "Sending 'Hello, World'..."
+    # # ws.send("Hello, World")
+    # # print "Sent"
+    # # print "Reeiving..."
+    # # result =  ws.recv()
+    # # print "Received '%s'" % result
+    # # ws.close()
 
     def init_sys_params(self):
         self.sys_params[CLIENT_ID] = self.key
@@ -36,12 +50,16 @@ class PrismClient:
 
     def do_post(self, action, params):
         url_str = self.url_info.get_site_with_append_path(action)
+        is_https = True if self.url_info.protocol == "https" else False
         return WebUtil.do_post(url_str, self.url_info,
-                               self.fix_params(self.get_headers(), params, METHOD_POST, UrlParser(url_str).path), self.get_headers())
+                               self.fix_params(self.get_headers(), params, METHOD_POST, UrlParser(url_str).path), self.get_headers(),
+                               is_https=is_https)
 
     def do_get(self, action, params):
         url_str = self.url_info.get_site_with_append_path(action)
-        return WebUtil.do_get(url_str, self.url_info, self.fix_params(self.get_headers(), params, METHOD_GET, UrlParser(url_str).path), self.get_headers())
+        is_https = True if self.url_info.protocol == "https" else False
+        return WebUtil.do_get(url_str, self.url_info, self.fix_params(self.get_headers(), params, METHOD_GET, UrlParser(url_str).path), self.get_headers(),
+                              is_https=is_https)
 
     def fix_params(self, headers, params, method, url_path):
         all_params = dict(params.items() + self.sys_params.items())

@@ -22,7 +22,7 @@ class WebUtil():
 
 
     @staticmethod
-    def do_post(url, url_info, params, header_data):
+    def do_post(url, url_info, params, header_data, is_https=False):
         logger.info("Request Type:do_post \t \n")
         logger.info("Request Url：%s \t \n" % (url))
         logger.info("Request Params:%s \t \n" % (params))
@@ -31,7 +31,11 @@ class WebUtil():
         conn = None
         try:
             params = urllib.urlencode(params)
-            conn = httplib.HTTPConnection(url_info.host, url_info.port)
+            if is_https:
+                conn = httplib.HTTPSConnection(url_info.host, 443)
+            else:
+                conn = httplib.HTTPConnection(url_info.host, url_info.port)
+
             conn.request(METHOD_POST, url, body=params, headers=header_data)
             response = conn.getresponse()
             return response.read()
@@ -42,16 +46,19 @@ class WebUtil():
                 conn.close()
 
     @staticmethod
-    def do_get(url, url_info, params, header_data):
+    def do_get(url, url_info, params, header_data, is_https=False):
         url += WebUtil.build_query(params)
         logger.info("Request Type:do_get \t \n")
         logger.info("Request Url：%s \t \n" % (url))
         logger.info("Request Params:%s \t \n" % (params))
         logger.info("Request Header Message:%s \t \n" % (header_data))
-
         conn = None
         try:
-            conn = httplib.HTTPConnection(url_info.host, url_info.port)
+            if is_https:
+                conn = httplib.HTTPSConnection(url_info.host, 443)
+            else:
+                conn = httplib.HTTPConnection(url_info.host, url_info.port)
+
             conn.request(METHOD_GET, url, headers=header_data)
 
             response = conn.getresponse()

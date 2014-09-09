@@ -24,9 +24,9 @@ from urlparse import urlparse
 import os
 import struct
 import uuid
-import sha
 import base64
 import logging
+import hashlib
 
 """
 websocket python client.
@@ -465,7 +465,7 @@ class WebSocket(object):
         result = result.lower()
 
         value = key + "258EAFA5-E914-47DA-95CA-C5AB0DC85B11"
-        hashed = base64.encodestring(sha.sha(value).digest()).strip().lower()
+        hashed = base64.encodestring(hashlib.sha1(value).digest()).strip().lower()
         return hashed == result
 
     def _read_headers(self):
@@ -736,7 +736,7 @@ class WebSocketApp(object):
                 data = self.sock.recv()
                 if data is None:
                     break
-                self._run_with_no_err(self.on_message, data)
+            self._run_with_no_err(self.on_message, data)
         except Exception, e:
             self._run_with_no_err(self.on_error, e)
         finally:
