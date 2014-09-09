@@ -2,12 +2,11 @@
 # coding=utf8
 from com.shopex import websocket
 
-from com.shopex.prism.PrismMessage import PrismMessage
 from com.shopex.utils.LogUtil import logger
 from com.shopex.prism.MessageHandler import PrismMessageHandler
+from com.shopex.websocket import ABNF
 
 # websocket.enableTrace(True)
-
 
 class PrismNotify(PrismMessageHandler):
     # socket
@@ -17,27 +16,23 @@ class PrismNotify(PrismMessageHandler):
                                              on_message=self.on_message,
                                              on_error=self.on_error,
                                              on_close=self.on_close)
-        self.message = ""
+        self.data = None
 
     def on_open(self, ws):
-        ws.send(self.message)
         logger.info("[PrismMessageHandler] on_open")
-
-    # 获取prismMessage消息
-    def get(self):
-        return PrismMessage()
+        ws.send(self.data, opcode=ABNF.OPCODE_BINARY)
 
     # 组装发布消息
     def publish(self, routing_key, message):
         logger.info("[PrismNotify] publish")
-        self.message = self.get().assemble_publish_data(routing_key, message)
+        self.data = self.assemble_publish_data(routing_key, message)
         self.socket.on_open = self.on_open
         self.socket.run_forever()
 
     # 消费信息
     def consume(self):
         logger.info("[PrismNotify] consume")
-        self.message = self.get().assemble_consume_date()
+        self.data = self.assemble_consume_date()
         self.socket.on_open = self.on_open
         self.socket.run_forever()
 

@@ -20,23 +20,16 @@ class PrismClientTestCase(unittest.TestCase):
     # params = {}
     # print self.prismClient.do_get("/platform/notify/status", params)
     #
-    #     #
+    # #
     # def testDoPost(self):
-    #     params = {"data": "hello"}
-    #     print self.prismClient.do_post("/platform/notify/write", params)
+    # params = {"data": "hello"}
+    # print self.prismClient.do_post("/platform/notify/write", params)
 
     def testWebSocketConnect(self):
         method = "/platform/notify"
         prism_notify = self.prismClient.notify(method)
         prism_notify.consume()
         prism_notify.publish("order.new", "mytest00001")
-        #
-        #     # def testWebSocketConnect_2(self):
-        #     # method = "/platform/notify"
-        #     # prism_notify = self.prismClient.execute_notify(method)
-        #     #     # prism_notify.consume()
-        #     #     # prism_notify.publish("order.new", "mytest00001")
-
 
 if __name__ == '__main__':
     unittest.main()
