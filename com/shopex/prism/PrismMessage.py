@@ -3,16 +3,15 @@
 
 
 class PrismMessage:
-    def __init__(self, socket):
-        self.socket = socket
+    def __init__(self):
         self.tag_id = 1
 
     def assemble_publish_data(self, routing_key, message):
-        return "1"
+        return "0x01"
 
     def assemble_ack_date(self):
-        return "2"
+        return "0x02"
 
     def assemble_consume_date(self):
-        return "3"
+        return "0x03"
 
