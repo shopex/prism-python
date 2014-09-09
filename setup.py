@@ -2,8 +2,7 @@
 # coding=utf8
 from setuptools import setup, find_packages
 
-import version
-
+version = 0.11
 
 setup(
     name="prism-python",

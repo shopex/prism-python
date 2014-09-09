@@ -10,7 +10,7 @@ class PrismClientTestCase(unittest.TestCase):
     def setUp(self):
         # self.url = "Http://localhost:3398"
         # self.url = "http://192.168.51.103:8899/api"
-        self.url = "HTTPS://dilbmtcv.apihub.cn/api";
+        self.url = "HTTP://dilbmtcv.apihub.cn/api";
         # self.url = "http://echo.websocket.org/"
         self.key = "buwb2lii"
         self.secret = "ucr72ygfutspqeuu6s36"
