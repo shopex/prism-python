@@ -19,7 +19,7 @@ class PrismMessageHandler():
         logger.info("[PrismMessageHandler] socket on_message!message is %s \t \n" % (message))
         json_message = json.loads(message)
         if json_message["tag"] == 1:
-            logger.info("[PrismNotify] send ack:%s" % (json_message["tag"]))
+            logger.info("[PrismMessageHandler] send ack:%s" % (json_message["tag"]))
             socket.send(self.assemble_ack_date(json_message["tag"]))
 
     def on_close(self, socket):
