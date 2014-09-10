@@ -28,7 +28,7 @@ class PrismClientTestCase(unittest.TestCase):
     def testWebSocketConnect(self):
         method = "/platform/notify"
         prism_notify = self.prismClient.notify(method)
-        prism_notify.consume()
+        # prism_notify.consume()
         prism_notify.publish("order.new", "mytest00001")
 
 if __name__ == '__main__':

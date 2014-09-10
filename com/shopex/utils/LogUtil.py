@@ -3,6 +3,7 @@
 import logging
 import sys
 import os
+from com.shopex.config import LOG_LEVEL
 
 PROJECT_NAME = u'prism-python'
 path = os.getcwdu()
@@ -23,4 +24,4 @@ stream_handler.setFormatter(formatter)
 # logger.addHandler(file_handler)
 logger.addHandler(stream_handler)
 
-logger.setLevel(logging.DEBUG)
+logger.setLevel(LOG_LEVEL)

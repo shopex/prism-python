@@ -14,3 +14,8 @@ DEFAULT_CHARSET = "utf-8"
 METHOD_GET = "GET"
 METHOD_POST = "POST"
 SEPARATOR = "&"
+
+# log_config
+import logging
+
+LOG_LEVEL = logging.DEBUG

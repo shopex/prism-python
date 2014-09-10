@@ -31,18 +31,6 @@ class PrismClient:
         # ws_url = "ws://echo.websocket.org/"
         return PrismNotify(ws_url)
 
-    # def execute_notify(self, method):
-    # ws_url = self.url_info.get_ws_url(method) + WebUtil.build_query(self.fix_params(None, {}, METHOD_GET, self.url_info.get_ws_path(method)))
-    # ws = websocket.create_connection(ws_url)
-    # print ws
-    # # print "Sending 'Hello, World'..."
-    # # ws.send("Hello, World")
-    # # print "Sent"
-    # # print "Reeiving..."
-    # # result =  ws.recv()
-    # # print "Received '%s'" % result
-    # # ws.close()
-
     def init_sys_params(self):
         self.sys_params[CLIENT_ID] = self.key
         self.sys_params[SIGN_METHOD] = "md5"

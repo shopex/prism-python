@@ -1,8 +1,7 @@
 # __author__ = 'daixinyu'
 # coding=utf8
 from setuptools import setup, find_packages
-
-version = 0.11
+from com.version import version
 
 setup(
     name="prism-python",
