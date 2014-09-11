@@ -20,7 +20,7 @@ ShopEx Prism sdk (python version)
 python sdk 2.6或者以上更高的版本
 
 
-打包与安装
+打包、安装、日志
 -----------------------------------------------
 
 
@@ -31,6 +31,8 @@ python sdk 2.6或者以上更高的版本
     cd prism-python/
 
     python setup.py sdist  #构建Prism SDK完成，构建SDK位于.dist目录中
+    
+    ps:版本号只需 com.version.py 中version=XXX修改即可
 
 2、安装
 
@@ -39,6 +41,10 @@ python sdk 2.6或者以上更高的版本
     cd prism-python-0.1
 
     python setup.py install  #安装Prism SDK完成
+    
+3、日志
+   
+   日志级别的修改com.shopex.config.py 讲LOG_LEVEL改成对应的ERROR、WARNING、INFO、DEBUG  
 
 使用方法
 -----------------------------------------------

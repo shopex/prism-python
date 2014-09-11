@@ -19,7 +19,7 @@ class PrismNotify(PrismMessageHandler):
         self.data = None
 
     def on_open(self, ws):
-        logger.info("[PrismMessageHandler] on_open")
+        logger.info("[PrismNotify] on_open")
         ws.send(self.data, opcode=ABNF.OPCODE_BINARY)
 
     # 组装发布消息

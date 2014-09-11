@@ -40,7 +40,7 @@ class WebUtil():
             response = conn.getresponse()
             return response.read()
         except Exception, e:
-            print e
+            logger.error("do_post:%s \t \n" % (e))
         finally:
             if conn:
                 conn.close()
@@ -64,7 +64,7 @@ class WebUtil():
             response = conn.getresponse()
             return response.read()
         except Exception, e:
-            print e
+            logger.error("do_get:%s \t \n" % (e))
         finally:
             if conn:
                 conn.close()
