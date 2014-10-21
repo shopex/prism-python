@@ -103,7 +103,9 @@ prism_notify=prismClient.notify(method);
 
 b、发布消息
 
+```
 prism_notify.publish("order.new","hello world");
+```
 
 c、开启队列消费
 
