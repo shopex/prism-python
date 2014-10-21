@@ -26,10 +26,10 @@ class PrismClient:
         self.refresh_token = ""
         self.init_sys_params()
 
-    def notify(self, method):
+    def notify(self, method,message_handler):
         ws_url = self.url_info.get_ws_url(method) + WebUtil.build_query(self.fix_params(None, {}, METHOD_GET, self.url_info.get_ws_path(method)))
         # ws_url = "ws://echo.websocket.org/"
-        return PrismNotify(ws_url)
+        return PrismNotify(ws_url,message_handler)
 
     def init_sys_params(self):
         self.sys_params[CLIENT_ID] = self.key

@@ -22,14 +22,41 @@ class PrismClientTestCase(unittest.TestCase):
     #
     # #
     # def testDoPost(self):
-    # params = {"data": "hello"}
-    # print self.prismClient.do_post("/platform/notify/write", params)
+    #     params = {"data": "hello"}
+    #     print self.prismClient.do_post("/platform/notify/write", params)
 
     def testWebSocketConnect(self):
         method = "/platform/notify"
-        prism_notify = self.prismClient.notify(method)
-        # prism_notify.consume()
+        prism_notify = self.prismClient.notify(method, PrismMessageHandler())
+        prism_notify.consume()
         prism_notify.publish("order.new", "mytest00001")
+
 
 if __name__ == '__main__':
     unittest.main()
+
+import sys
+
+reload(sys)
+sys.setdefaultencoding("utf-8")
+
+import json
+
+
+class PrismMessageHandler():
+    def __init__(self):
+        pass
+
+    def on_message(self, socket, message):
+        print "[PrismMessageHandler] socket on_message!message is %s \t \n" % (message)
+        json_message = json.loads(message)
+        print "[on_message] %s \t \n" % (json_message)
+        if json_message["tag"] == 1:
+            print ("[PrismMessageHandler] send ack:%s" % (json_message["tag"]))
+            socket.send(self.assemble_ack_date(json_message["tag"]))
+
+    def on_close(self, socket):
+        print ("[PrismMessageHandler] on_close")
+
+    def on_error(self, socket):
+        print ("[PrismMessageHandler] on_error")
