@@ -41,6 +41,7 @@ reload(sys)
 sys.setdefaultencoding("utf-8")
 
 import json
+import struct
 
 
 class PrismMessageHandler():
@@ -54,6 +55,9 @@ class PrismMessageHandler():
         if json_message["tag"] == 1:
             print ("[PrismMessageHandler] send ack:%s" % (json_message["tag"]))
             socket.send(self.assemble_ack_date(json_message["tag"]))
+
+    def assemble_ack_date(self, tag):
+        return struct.pack("BB", 0x03, tag + 48)
 
     def on_close(self, socket):
         print ("[PrismMessageHandler] on_close")
