@@ -98,18 +98,17 @@ a、建立websocket连接
 
 ```
 method = "/platform/notify"
-prismClient.notify(method);
+prism_notify=prismClient.notify(method);
 ```
 
 b、发布消息
 
-prismClient.publish("order.new","hello world");
+prism_notify.publish("order.new","hello world");
 
 c、开启队列消费
 
 ```
-prismClient.consume();
-prismClient.ack(1);
+prism_notify.consume();
 ```
 
 
