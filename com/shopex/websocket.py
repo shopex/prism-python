@@ -732,11 +732,17 @@ class WebSocketApp(object):
             self.sock = WebSocket(self.get_mask_key)
             self.sock.connect(self.url)
             self._run_with_no_err(self.on_open)
-            # while self.keep_running:
-            data = self.sock.recv()
-            # if data is None:
-            # break
-            self._run_with_no_err(self.on_message, data)
+            # # while self.keep_running:
+            # data = self.sock.recv()
+            # # if data is None:
+            # # break
+            # self._run_with_no_err(self.on_message, data)
+
+            while self.keep_running:
+                data = self.sock.recv()
+                if data is None:
+                    break
+                self._run_with_no_err(self.on_message, data)
         except Exception, e:
             self._run_with_no_err(self.on_error, e)
         finally:
