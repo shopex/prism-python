@@ -56,7 +56,7 @@ class PrismClientTestCase(unittest.TestCase):
         method = "/platform/notify"
         prism_notify = self.prismClient.notify(method, PrismMessageHandler())
         prism_notify.consume()
-        prism_notify.publish("order.new", "mytest00001")
+        # prism_notify.publish("order.new", "mytest00001")
 
 
 if __name__ == '__main__':
