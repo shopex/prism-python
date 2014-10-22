@@ -96,10 +96,16 @@ prism_oauth.require_oauth()   //启动OAuth认证
 
 a、建立websocket连接
 
+设置websocket生命周期函数
+参考[PrismClientTestCase](https://github.com/shopex/prism-python/blob/master/test/PrismClientTestCase.py)的class PrismMessageHandler()
+
+
 ```
-method = "/platform/notify"
-prism_notify=prismClient.notify(method);
+method = "/platform/notify";
+prism_notify = prismClient.notify(method, PrismMessageHandler())
 ```
+
+
 
 b、发布消息
 
