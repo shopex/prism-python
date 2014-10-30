@@ -14,7 +14,7 @@ class PrismMessageHandler():
 
     # 接受到Websocket服务端信息时触发调用
     def on_message(self, socket, message):
-        print "[PrismMessageHandler] socket on_message!message is %s \t \n" % (message)
+        print "[PrismMessageHandler] socket on_message! \t \n"
         json_message = json.loads(message)
         print "[on_message] %s \t \n" % (json_message)
         if json_message["tag"] == 1:  # 这里只对第一条消息做ACK应答

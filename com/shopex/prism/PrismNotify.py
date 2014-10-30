@@ -20,8 +20,9 @@ class PrismNotify():
         self.data = None
 
     def on_open(self, ws):
-        logger.info("[PrismNotify] on_open")
-        ws.send(self.data, opcode=ABNF.OPCODE_BINARY)
+        logger.info("[PrismNotify] on_open %s " %(self.data))
+        ws.send(self.data)
+        # ws.send(self.data, opcode=ABNF.OPCODE_BINARY)
 
     # 组装发布消息
     def publish(self, routing_key, message):

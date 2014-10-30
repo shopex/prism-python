@@ -708,11 +708,17 @@ class WebSocketApp(object):
         self.get_mask_key = get_mask_key
         self.sock = None
 
-    def send(self, data, opcode=ABNF.OPCODE_TEXT):
+    # def send(self, data, opcode=ABNF.OPCODE_TEXT):
+    #     """
+    #     send message. data must be utf-8 string or unicode.
+    #     """
+    #     self.sock.send(data, opcode=opcode)
+
+    def send(self, data):
         """
         send message. data must be utf-8 string or unicode.
         """
-        self.sock.send(data, opcode=opcode)
+        self.sock.send(data)
 
     def close(self):
         """
