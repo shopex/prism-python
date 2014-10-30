@@ -18,4 +18,4 @@ SEPARATOR = "&"
 # log_config
 import logging
 
-LOG_LEVEL = logging.ERROR
+LOG_LEVEL = logging.DEBUG
