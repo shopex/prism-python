@@ -26,10 +26,10 @@ class PrismClient:
         self.refresh_token = ""
         self.init_sys_params()
 
-    def notify(self, method,message_handler):
+    def notify(self, method, message_handler):
         ws_url = self.url_info.get_ws_url(method) + WebUtil.build_query(self.fix_params(None, {}, METHOD_GET, self.url_info.get_ws_path(method)))
         # ws_url = "ws://echo.websocket.org/"
-        return PrismNotify(ws_url,message_handler)
+        return PrismNotify(ws_url, message_handler)
 
     def init_sys_params(self):
         self.sys_params[CLIENT_ID] = self.key
@@ -66,8 +66,9 @@ class PrismClient:
         str_get_param = mix_request_params(get_params)
         str_post_param = mix_request_params(post_params)
         mix_all_params = self.secret + SEPARATOR + method_type + SEPARATOR + url_encode(url_path) \
-                         + SEPARATOR + urllib.quote(str_header) + SEPARATOR + urllib.quote(str_get_param) \
-                         + SEPARATOR + urllib.quote(str_post_param) + SEPARATOR + self.secret
+                         + SEPARATOR + urllib.quote(str_header, safe='') + SEPARATOR + urllib.quote(str_get_param, safe='') \
+                         + SEPARATOR + urllib.quote(str_post_param, safe='') + SEPARATOR + self.secret
+
         logger.info("[sign]%s \t \n" % (mix_all_params))
         md5.update(mix_all_params)
         md5.digest()
