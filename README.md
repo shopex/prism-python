@@ -102,10 +102,11 @@ a、建立websocket连接
 
 ```
 method = "/platform/notify";
-prism_notify = prismClient.notify(method, PrismMessageHandler())
+prism_notify = prismClient.notify(method, PrismMessageHandler(sleep=60, retry_times=3))
 ```
-
-
+增加了websocket 断开重试机制
+self.retry_times = retry_times   #重试次数,默认断开后一直重试
+self.sleep = sleep               #间歇时间,默认断开每隔1分钟重试
 
 b、发布消息
 

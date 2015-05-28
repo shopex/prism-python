@@ -10,8 +10,8 @@ from com.shopex.prism.PrismClient import PrismClient
 
 class PrismMessageHandler():
     def __init__(self, sleep=60, retry_times=None):
-        self.retry_times = retry_times
-        self.sleep = sleep
+        self.retry_times = retry_times   #重试次数,默认断开后一直重试
+        self.sleep = sleep               #间歇时间,默认断开每隔1分钟重试
 
     # 接受到Websocket服务端信息时触发调用
     def on_message(self, socket, message):
