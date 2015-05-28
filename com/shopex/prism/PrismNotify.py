@@ -31,13 +31,13 @@ class PrismNotify():
         logger.info("[PrismNotify] on_close")
         logger.info("[PrismNotify] real_times:%s \t retry_times:%s \t \n" % (self.real_times, self.retry_times))
         if self.real_times < self.retry_times or self.retry_times == None:
+            time.sleep(self.sleep)
             self.socket = websocket.WebSocketApp(self.ws_url,
                                                  on_open=self.on_open,
                                                  on_message=self.message_handler.on_message,
                                                  on_error=self.on_error,
                                                  on_close=self.on_close)
             self.consume()
-            time.sleep(self.sleep)
 
     # Websocket发生异常时触发调用
     def on_error(self, socket, error):
