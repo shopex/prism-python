@@ -3,39 +3,57 @@
 from com.shopex import websocket
 
 from com.shopex.utils.LogUtil import logger
-# from com.shopex.prism.MessageHandler import PrismMessageHandler
-from com.shopex.websocket import ABNF
-import struct
+import struct, time
 
 # websocket.enableTrace(True)
 
 class PrismNotify():
     # socket
     def __init__(self, ws_url, message_handler):
-        # PrismMessageHandler.__init__(self)
-        self.socket = websocket.WebSocketApp(ws_url,
-                                             on_message=message_handler.on_message,
-                                             on_error=message_handler.on_error,
-                                             on_close=message_handler.on_close)
+        self.ws_url = ws_url
+        self.message_handler = message_handler
+        self.retry_times = message_handler.retry_times
+        self.sleep = message_handler.sleep
+        self.real_times = 0
+        self.socket = websocket.WebSocketApp(self.ws_url,
+                                             on_open=self.on_open,
+                                             on_message=self.message_handler.on_message,
+                                             on_error=self.on_error,
+                                             on_close=self.on_close)
         self.data = None
 
     def on_open(self, ws):
-        logger.info("[PrismNotify] on_open %s " %(self.data))
+        logger.info("[PrismNotify] on_open %s " % (self.data))
         ws.send(self.data)
-        # ws.send(self.data, opcode=ABNF.OPCODE_BINARY)
+
+    # Websocket连接关闭时触发调用
+    def on_close(self, socket):
+        logger.info("[PrismNotify] on_close")
+        logger.info("[PrismNotify] real_times:%s \t retry_times:%s \t \n" % (self.real_times, self.retry_times))
+        if self.real_times < self.retry_times or self.retry_times == None:
+            self.socket = websocket.WebSocketApp(self.ws_url,
+                                                 on_open=self.on_open,
+                                                 on_message=self.message_handler.on_message,
+                                                 on_error=self.on_error,
+                                                 on_close=self.on_close)
+            self.consume()
+            time.sleep(self.sleep)
+
+    # Websocket发生异常时触发调用
+    def on_error(self, socket, error):
+        logger.info("[PrismNotify] on_error,error is %s" % (error))
 
     # 组装发布消息
     def publish(self, routing_key, message):
         logger.info("[PrismNotify] publish")
         self.data = self.assemble_publish_data(routing_key, message)
-        self.socket.on_open = self.on_open
         self.socket.run_forever()
 
     # 消费信息
     def consume(self):
+        self.real_times += 1
         logger.info("[PrismNotify] consume")
         self.data = self.assemble_consume_date()
-        self.socket.on_open = self.on_open
         self.socket.run_forever()
 
     # 封装消息
