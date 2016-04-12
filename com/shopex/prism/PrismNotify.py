@@ -50,10 +50,10 @@ class PrismNotify():
         self.socket.run_forever()
 
     # 消费信息
-    def consume(self):
+    def consume(self, queuq_name):
         self.real_times += 1
         logger.info("[PrismNotify] consume")
-        self.data = self.assemble_consume_date()
+        self.data = self.assemble_consume_date(queuq_name)
         self.socket.run_forever()
 
     # 封装消息
@@ -66,11 +66,14 @@ class PrismNotify():
                                    routing_key_pack, message_pack, content_type_pack)
         return struct.pack("B%ds" % (len(content_pack)), 0x01, content_pack)
 
-
     def assemble_ack_date(self, tag):
         return struct.pack("BB", 0x03, tag + 48)
 
-
-    def assemble_consume_date(self):
-        return struct.pack("B", 0x02)
-
+    def assemble_consume_date(self, queuq_name):
+        if len(queuq_name) > 0:
+            ret = struct.pack("BBB", 0x02, len(queuq_name) / 256, len(queuq_name) % 256)
+            for i in queuq_name:
+                ret = ret + struct.pack('s', i)
+            return ret
+        else:
+            return struct.pack("B", 0x02)
