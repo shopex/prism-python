@@ -34,7 +34,7 @@ class WebUtil():
             if is_https:
                 conn = httplib.HTTPSConnection(url_info.host, 443)
             else:
-                conn = httplib.HTTPConnection(url_info.host, url_info.port, timeout=30)
+                conn = httplib.HTTPConnection(url_info.host, url_info.port, 30)
 
             conn.request(METHOD_POST, url, body=params, headers=header_data)
             response = conn.getresponse()
@@ -57,7 +57,7 @@ class WebUtil():
             if is_https:
                 conn = httplib.HTTPSConnection(url_info.host, 443)
             else:
-                conn = httplib.HTTPConnection(url_info.host, url_info.port, timeout=30)
+                conn = httplib.HTTPConnection(url_info.host, url_info.port, 30)
 
             conn.request(METHOD_GET, url, headers=header_data)
 
