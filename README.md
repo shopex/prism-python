@@ -117,7 +117,8 @@ prism_notify.publish("order.new","hello world");
 c、开启队列消费
 
 ```
-prism_notify.consume();
+queue_name = ""
+prism_notify.consume(queue_name);
 ```
 
 
