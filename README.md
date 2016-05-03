@@ -117,7 +117,7 @@ prism_notify.publish("order.new","hello world");
 c、开启队列消费
 
 ```
-queue_name = ""
+queue_name = "" --- 待消费的队列名 (空值或者不传 - prism 默认队列,非空指定消费队列)
 prism_notify.consume(queue_name);
 ```
 
